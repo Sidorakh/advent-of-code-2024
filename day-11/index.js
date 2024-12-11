@@ -56,6 +56,7 @@ function recursive_process(stone, steps) {
 
 module.exports.part_1 = async()=>{
     const stones = input.split(' ').map(v=>parseInt(v));
+    const start_time = performance.now();
 
     const blinks = 25;
     for (let blink=0;blink<blinks;blink++) {
@@ -75,16 +76,22 @@ module.exports.part_1 = async()=>{
             }
         }
     }
+    const end_time = performance.now();
     console.log(`Stones: ${stones.length}`);
+    console.log(`Time: ${end_time-start_time}ms`);
 };
 
 module.exports.part_2 = async() => {
     const stones = input.split(' ').map(Number);
+    const start_time = performance.now();
     let total = 0;
     for (const stone of stones) {
         total += recursive_process(stone, 75)
     }
+    const end_time = performance.now();
     console.log(`Total: ${total}`);
+    console.log(`Time: ${end_time-start_time}ms`);
+    
 }
 
 /*
