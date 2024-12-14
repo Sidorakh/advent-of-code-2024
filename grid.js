@@ -36,6 +36,21 @@ class Grid {
     log() {
         console.log(this.data.map(v=>v.join('')).join('\n'));
     }
+    stringify() {
+        return this.data.map(v=>v.join('')).join('\n')
+    }
+    static create(w,h,value=null) {
+        const d = [];
+        for (let x=0;x<w;x++) {
+            const arr = [];
+            for (let y=0;y<h;y++) {
+                arr.push(value);
+            }
+            d.push(arr);
+        }
+        return new Grid(d);
+        
+    }
 }
 
 
