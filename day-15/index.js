@@ -64,6 +64,8 @@ module.exports.part_1 = async()=>{
             }
         }
     }
+    const start_time = performance.now();
+
     for (const move of moves) {
         let ox = 0;
         let oy = 0;
@@ -123,7 +125,9 @@ module.exports.part_1 = async()=>{
         }
     }
 
+    const end_time = performance.now();
     console.log(`Total: ${total}`);
+    console.log(`Time taken: ${(end_time-start_time).toFixed(4)}ms`);
 };
 
 module.exports.part_2 = async()=>{
@@ -143,6 +147,7 @@ module.exports.part_2 = async()=>{
             }
         }
     }
+    const start_time = performance.now();
 
     // const c = map.get(robot.x,robot.y);
     // map.set(robot.x,robot.y,'@');
@@ -150,7 +155,6 @@ module.exports.part_2 = async()=>{
     // map.log();
     // console.log('\n');
     // map.set(robot.x,robot.y,c);
-    
     for (const move of moves) {
         let ox = 0;
         let oy = 0;
@@ -170,7 +174,7 @@ module.exports.part_2 = async()=>{
         const next_tile = map.get(robot.x + ox, robot.y + oy);
         
         if (next_tile == '[' || next_tile == ']') {
-            console.log('Attempt to push');
+            //console.log('Attempt to push');
             if (ox != 0) {
                 // HORIZONTAL PUSH ONLY
                 let i=1;
@@ -188,7 +192,7 @@ module.exports.part_2 = async()=>{
                     i+=1;
                 }
 
-                console.log(`Can push: ${can_push} | ${i}`)
+                //console.log(`Can push: ${can_push} | ${i}`)
                 if (can_push) {
                     
                     for (let j=i;j > 1;j--) {
@@ -205,7 +209,7 @@ module.exports.part_2 = async()=>{
                 const to_push = new Map();
                 let can_push = true;
                 while (to_check.length > 0) {
-                    console.log(to_check.length);
+                    //console.log(to_check.length);
                     const el = to_check.shift();
                     const c = map.get(el.x,el.y);
                     checked.set(coord(el.x,el.y),true);
@@ -235,13 +239,13 @@ module.exports.part_2 = async()=>{
                         to_check.push({x: el.x, y: el.y+oy});
                     }
                 }
-                console.log(`Can push: ${can_push} : ${to_push.size}`);
+                //console.log(`Can push: ${can_push} : ${to_push.size}`);
                 if (can_push == true) {
                     const boxes = [...to_push.values()];
                     const s = -Math.sign(boxes[0].y - robot.y);
                     boxes.sort((a,b)=>(a.y-b.y)*s);
 
-                    console.log(boxes.map(v=>`${v.x},${v.y}`).join('\n'))
+                    //console.log(boxes.map(v=>`${v.x},${v.y}`).join('\n'))
 
                     for (const box of boxes) {
                         const b = map.get(box.x,box.y);
@@ -276,6 +280,7 @@ module.exports.part_2 = async()=>{
             }
         }
     }
-
+    const end_time = performance.now();
     console.log(`Total: ${total}`);
+    console.log(`Time taken: ${(end_time-start_time).toFixed(4)}ms`);
 };
